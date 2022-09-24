@@ -7,5 +7,7 @@ module com.example.todoapplication {
     requires org.kordamp.bootstrapfx.core;
 
     opens com.example.todoapplication to javafx.fxml;
+    opens Model to javafx.fxml;
     exports com.example.todoapplication;
+    exports Model;
 }
