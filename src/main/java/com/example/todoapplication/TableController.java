@@ -6,37 +6,34 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class HelloController {
+public class TableController {
 
     @FXML
-    private TableView table;
-    @FXML
-    private Button addNewButton;
-    @FXML
-    private TextField inputTask;
-    @FXML
-    private ComboBox<PriorityLevel> comboBox;
-    @FXML
-    private DatePicker datePicker;
+    private TableView<Cetli> table;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
-    ObservableList<Cetli> Cetlik = FXCollections.observableArrayList();
+    public final static ObservableList<Cetli> Cetlik = FXCollections.observableArrayList();
 
 
     public void initialize(){
-        comboBox.getItems().add(PriorityLevel.Red);
-        comboBox.getItems().add(PriorityLevel.Yellow);
-        comboBox.getItems().add(PriorityLevel.Green);
 
         TableColumn taskCol = new TableColumn("Task");
         taskCol.setMinWidth(350);
@@ -81,10 +78,17 @@ public class HelloController {
         table.setItems(Cetlik);
     }
 
-    public void clickAddNewButton(ActionEvent event) {
-        Cetli newCetli = new Cetli(inputTask.getText(), comboBox.getValue(), datePicker.getValue().atStartOfDay());
-        Cetlik.add(newCetli);
-        inputTask.clear();
-        datePicker.setValue(null);
+    public void clickNewButton(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("workShop.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Cetli Műhely");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void clickDeleteButton(ActionEvent event) {
+        Cetli selectedTask = table.getSelectionModel().getSelectedItem();
+        table.getItems().remove(selectedTask);
     }
 }
