@@ -10,6 +10,22 @@ public enum PriorityLevel {
 
     Red,
     Yellow,
-    Green
+    Green;
 
+    @Override
+    public String toString(){
+        switch (this){
+            case Red -> {
+                return "Red";
+            }
+            case Yellow -> {
+                return "Yellow";
+            }
+            case Green -> {
+                return "Green";
+            }
+            default -> throw new IllegalArgumentException();
+
+        }
+    }
 }

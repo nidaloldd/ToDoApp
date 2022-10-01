@@ -5,6 +5,7 @@ module com.example.todoapplication {
     requires org.controlsfx.controls;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens com.example.todoapplication to javafx.fxml;
     opens Model to javafx.fxml;

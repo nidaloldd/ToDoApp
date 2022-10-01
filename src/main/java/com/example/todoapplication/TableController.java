@@ -1,5 +1,6 @@
 package com.example.todoapplication;
 
+import Database.DB;
 import Model.Cetli;
 import Model.PriorityLevel;
 import javafx.collections.FXCollections;
@@ -30,7 +31,8 @@ public class TableController {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
-    public final static ObservableList<Cetli> Cetlik = FXCollections.observableArrayList();
+    public static ObservableList<Cetli> Cetlik = FXCollections.observableArrayList();
+
 
 
     public void initialize(){
@@ -74,8 +76,11 @@ public class TableController {
         });
         deadLineCol.setCellValueFactory(new PropertyValueFactory<Cetli, LocalDateTime>("deadLine"));
 
+
         table.getColumns().addAll(taskCol, priorityCol, deadLineCol);
+        Cetlik.addAll(HelloApplication.db.getAllContacts());
         table.setItems(Cetlik);
+
     }
 
     public void clickNewButton(ActionEvent event) throws IOException {
@@ -90,5 +95,6 @@ public class TableController {
     public void clickDeleteButton(ActionEvent event) {
         Cetli selectedTask = table.getSelectionModel().getSelectedItem();
         table.getItems().remove(selectedTask);
+        HelloApplication.db.removeContact(selectedTask);
     }
 }

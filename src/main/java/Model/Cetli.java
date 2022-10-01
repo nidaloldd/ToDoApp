@@ -1,15 +1,17 @@
 package Model;
+import com.example.todoapplication.HelloApplication;
+
 import java.time.LocalDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-    /**
-     * Cetli is a note card in which we store a Task we want to do
-     * and other useful information about the task.
-     *
-     */
-    public class Cetli {
+/**
+ * Cetli is a note card in which we store a Task we want to do
+ * and other useful information about the task.
+ *
+ */
+public class Cetli {
     /**
      * the numberOfInstance gives us the iD of the object.
      */
@@ -87,15 +89,16 @@ import java.util.concurrent.TimeUnit;
      * @see CetliContainer
      * and also call scheduledExecutor
      */
-    public Cetli(String task, PriorityLevel priorityLevel, LocalDateTime deadLine) {
-        this.iD = numberOfInstance++;
+    public Cetli(int iD, String task, String priorityLevel, String deadLine) {
+        this.iD = iD;
         this.task = task;
-        this.priorityLevel = priorityLevel;
+        this.priorityLevel = PriorityLevel.valueOf(priorityLevel);
         //this.deadLine = deadLine;
-        this.deadLine = deadLine;
+        this.deadLine = LocalDateTime.parse(deadLine,HelloApplication.formatter);
         CetliContainer.add(this);
         scheduledExecutor();
     }
+
 
     @Override
     public String toString(){
@@ -144,6 +147,9 @@ import java.util.concurrent.TimeUnit;
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
+    public String getPriorityLevelString() {
+        return priorityLevel.toString();
+    }
 
     public void setPriorityLevel(PriorityLevel priorityLevel) {
         this.priorityLevel = priorityLevel;
@@ -156,5 +162,8 @@ import java.util.concurrent.TimeUnit;
     public void setDeadLine(LocalDateTime deadLine) {
         scheduledExecutor();
         this.deadLine = deadLine;
+    }
+    public String getDeadLineString() {
+        return deadLine.format(HelloApplication.formatter);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.todoapplication;
 
+import Database.DB;
 import Model.Cetli;
 import Model.PriorityLevel;
 import javafx.event.ActionEvent;
@@ -48,8 +49,11 @@ public class WorkShopController {
     }
 
     public void clickAddButton(ActionEvent event) throws IOException {
-        System.out.println(hourPicker.getValue());
-        newCetli = new Cetli(inputTask.getText(), priorityLevelPicker.getValue(), LocalDateTime.of(datePicker.getValue(), LocalTime.of(hourPicker.getValue(), minutePicker.getValue())));
+        newCetli = new Cetli(10,inputTask.getText(),
+                priorityLevelPicker.getValue().toString(),
+                LocalDateTime.of(datePicker.getValue(), LocalTime.of(hourPicker.getValue(), minutePicker.getValue())).format(HelloApplication.formatter));
+
+        HelloApplication.db.addContact(newCetli);
         TableController.Cetlik.add(newCetli);
     }
 }
