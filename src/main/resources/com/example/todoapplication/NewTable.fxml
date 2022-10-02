@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todoapplication.ToDoController">
+    <children>
+      <SplitPane dividerPositions="0.4080267558528428" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+              <TableView fx:id="table" editable="true" prefHeight="376.0">
+                  <columns>
+                      <TableColumn prefWidth="75.0" text="Column X" />
+                  </columns>
+              </TableView>
+            <VBox>
+               <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="392.0" rotate="10.0" text="Cetli Műhely" textAlignment="CENTER">
+                    <font>
+                        <Font size="65.0" />
+                    </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                </Label>
+                  <Separator prefHeight="22.0" prefWidth="287.0" />
+                <TextField fx:id="inputTask" prefHeight="25.0" prefWidth="421.0" promptText="Enter Task">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></TextField>
+                  <Separator prefHeight="15.0" prefWidth="287.0" />
+                <ComboBox fx:id="priorityLevelPicker" prefHeight="29.0" prefWidth="150.0" promptText="Priority Level">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></ComboBox>
+                  <Separator prefHeight="15.0" prefWidth="287.0" />
+                <DatePicker fx:id="datePicker" promptText="Choose Deadline">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></DatePicker>
+                  <Separator prefHeight="15.0" prefWidth="287.0" />
+                <ComboBox fx:id="minutePicker" prefWidth="150.0" promptText="Choose Minute">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></ComboBox>
+                  <Separator prefHeight="15.0" prefWidth="287.0" />
+                <ComboBox fx:id="hourPicker" prefWidth="150.0" promptText="Choose Hour">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></ComboBox>
+                  <Separator prefHeight="15.0" prefWidth="287.0" />
+                  <HBox>
+                     <children>
+                      <Button fx:id="addButton" mnemonicParsing="false" onAction="#clickAddButton" prefHeight="17.0" prefWidth="70.0" text="Add">
+                          <font>
+                              <Font name="System Bold" size="16.0" />
+                          </font>
+                      </Button>
+                        <Separator orientation="VERTICAL" prefHeight="25.0" prefWidth="59.0" />
+                          <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#clickDeleteButton" prefHeight="25.0" prefWidth="71.0" text="Delete" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+        </items>
+      </SplitPane>
+    </children>
+</AnchorPane>

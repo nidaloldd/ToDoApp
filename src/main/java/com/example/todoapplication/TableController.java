@@ -97,4 +97,7 @@ public class TableController {
         table.getItems().remove(selectedTask);
         HelloApplication.db.removeContact(selectedTask);
     }
+
+    public void clickAddButton(ActionEvent actionEvent) {
+    }
 }
