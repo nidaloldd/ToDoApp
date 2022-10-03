@@ -108,5 +108,7 @@
 
 ## Jelenlegi állapot
 
+![Task](Tervek/currentstate.PNG)
+
 
 
