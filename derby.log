@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Sun Oct 02 16:45:55 CEST 2022:
- Derby The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579) változat betöltése: a816c00e-0183-9929-2853-00000b033fd8 példány
-a(z) C:\Users\minde\OneDrive\Asztali gép\ToDoApp\sampleDB adatbázis-könyvtáron: jdk.internal.loader.ClassLoaders$AppClassLoader@133314b 
+Tue Nov 01 16:15:50 CET 2022:
+ Derby The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579) változat betöltése: a816c00e-0184-33c3-5675-00000afba9f8 példány
+a(z) C:\Users\minde\OneDrive\Asztali gép\ToDoApp-master\sampleDB adatbázis-könyvtáron: jdk.internal.loader.ClassLoaders$AppClassLoader@133314b 
 
 java.vendor=Amazon.com Inc.
 java.runtime.version=18.0.2+9-FR
-user.dir=C:\Users\minde\OneDrive\Asztali gép\ToDoApp
+user.dir=C:\Users\minde\OneDrive\Asztali gép\ToDoApp-master
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

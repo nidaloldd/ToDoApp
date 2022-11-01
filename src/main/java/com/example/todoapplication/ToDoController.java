@@ -53,6 +53,8 @@ public class ToDoController {
         table.getColumns().addAll(taskCol, priorityCol, deadLineCol);
         Cetlik.addAll(HelloApplication.db.getAllContacts());
         table.setItems(Cetlik);
+
+
     }
 
     public void setComboboxValues(){

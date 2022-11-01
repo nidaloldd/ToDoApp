@@ -1,0 +1,24 @@
+
+.parent{
+    -fx-background-color:  #2C3333;
+}
+.container{
+    -fx-background-color:  #395B64;
+}
+.card{
+    -fx-background-color:  #A5C9CA;
+}
+
+
+.close-btn{
+    -fx-background-color: #transparent;
+}
+.close-btn:hover{
+    -fx-background-color: #E81123;
+}
+.min-btn{
+    -fx-background-color: #transparent;
+}
+.min-btn:hover{
+    -fx-background-color: #171717;
+}
