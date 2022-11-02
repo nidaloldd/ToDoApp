@@ -1,6 +1,7 @@
 package Database;
 
 import Model.Cetli;
+import Model.Tree;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -53,7 +54,7 @@ public class DB {
             ResultSet rs = dbmd.getTables(null, "APP", "CONTACTS", null);
             if(!rs.next())
             {
-                createStatement.execute("create table contacts(id INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),task varchar(20), priorityLevel varchar(20), deadLine varchar(30))");
+                createStatement.execute("create table contacts(id INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),task varchar(20), priorityLevel varchar(20), deadLine varchar(30), taskTree varchar(30))");
             }
         } catch (SQLException ex) {
             System.out.println("Valami baj van az adattáblák létrehozásakor.");
@@ -69,7 +70,7 @@ public class DB {
             users = new ArrayList<>();
 
             while (rs.next()){
-                Cetli actualCetli = new Cetli(rs.getInt("iD"),rs.getString("task"),rs.getString("priorityLevel"),rs.getString("DeadLine"));
+                Cetli actualCetli = new Cetli(rs.getInt("iD"),rs.getString("task"),rs.getString("priorityLevel"),rs.getString("DeadLine"), rs.getString("taskTree"));
                 users.add(actualCetli);
             }
         } catch (SQLException ex) {
@@ -81,12 +82,17 @@ public class DB {
 
     public void addContact(Cetli cetli){
         try {
-            String sql = "insert into contacts (task, priorityLevel, deadLine) values (?,?,?)";
+            String sql = "insert into contacts (task, priorityLevel, deadLine, taskTree) values (?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, cetli.getTask());
+            preparedStatement.setString(1, cetli.getMainTask());
             preparedStatement.setString(2, cetli.getPriorityLevelString());
             preparedStatement.setString(3, cetli.getDeadLineString());
+            preparedStatement.setString(4, cetli.getTaskTree());
+
+
             preparedStatement.execute();
+
+
         } catch (SQLException ex) {
             System.out.println("Valami baj van a contact hozzáadásakor");
             System.out.println(""+ex);
@@ -97,7 +103,7 @@ public class DB {
         try {
             String sql = "update contacts set task = ?, priorityLevel = ? , deadLine = ? where id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, cetli.getTask());
+            preparedStatement.setString(1, cetli.getMainTask());
             preparedStatement.setString(2, cetli.getPriorityLevelString());
             preparedStatement.setString(3, cetli.getDeadLineString());
             preparedStatement.setInt(4, cetli.getID());
@@ -119,6 +125,5 @@ public class DB {
             System.out.println(""+ex);
         }
     }
-
-
+    
 }

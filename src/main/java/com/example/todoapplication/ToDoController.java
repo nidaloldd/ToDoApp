@@ -39,7 +39,7 @@ public class ToDoController {
     public static ObservableList<Cetli> Cetlik = FXCollections.observableArrayList();
 
     public void initialize() {
-        setComboboxValues();
+        setComboBoxValues();
 
         TableColumn taskCol = new TableColumn("Task");
         setTaskCol(taskCol);
@@ -57,7 +57,7 @@ public class ToDoController {
 
     }
 
-    public void setComboboxValues(){
+    public void setComboBoxValues(){
         priorityLevelPicker.getItems().add(PriorityLevel.Red);
         priorityLevelPicker.getItems().add(PriorityLevel.Yellow);
         priorityLevelPicker.getItems().add(PriorityLevel.Green);

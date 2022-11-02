@@ -2,6 +2,8 @@ package com.example.todoapplication;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -35,40 +37,48 @@ public class TervController  implements Initializable {
     @FXML
     TilePane tilePane;
     @FXML
-    AnchorPane paneSlide;
+    AnchorPane cetliMuhelyPane;
     @FXML
     Button slideInButton;
     @FXML
     Button slideOutButton;
+    @FXML
+    TilePane inputCetliPane;
     ArrayList<TreeView> trees = new ArrayList<>();
 
     private double xOffset=0,yOffset=0;
-
+    GetInputCardController getInputCardController;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
 
+        ArrayList<Cetli> data = HelloApplication.db.getAllContacts();
         //makeDraggable(HelloApplication.stage, rootPane);
 
         makeStageDragable();
-        paneSlide.widthProperty().addListener((obs, oldVal, newVal) -> {
-            paneSlide.setVisible(false);
+
+        cetliMuhelyPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            cetliMuhelyPane.setVisible(false);
             slideIn();
 
         });
 
-        ArrayList<Cetli> data = HelloApplication.db.getAllContacts();
-
         for (Cetli c:data) {
-
-
             tilePane.getChildren().add(createCetliFxml(c));
         }
 
-        paneSlide.setTranslateX(-160);
+        cetliMuhelyPane.setTranslateX(-160);
         slideOutButton.setVisible(false);
         slideInButton.setVisible(true);
 
+        Node inputCetli = createInputCetliFxml();
+        inputCetliPane.getChildren().add(inputCetli);
+
+
+
+    }
+    public void clickAddButton(ActionEvent actionEvent) {
+        getInputCardController.getData();
     }
 
     /*
@@ -77,7 +87,7 @@ public class TervController  implements Initializable {
         BorderPane borderPane = new BorderPane();
 
         Label taskLabel = new Label();
-        taskLabel.setText(cetli.getTask());
+        taskLabel.setText(cetli.getMainTask());
         BorderPane.setAlignment(taskLabel,Pos.CENTER);
         BorderPane.setMargin(taskLabel, new Insets(30));
 
@@ -162,6 +172,21 @@ public class TervController  implements Initializable {
         }
         return new Pane();
     }
+    private Node createInputCetliFxml(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/getInputCard.fxml"));
+            Node node = fxmlLoader.load();
+            getInputCardController = fxmlLoader.getController();
+            getInputCardController.setComboBoxValues();
+
+            return  node;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Pane();
+    }
     private TreeView<String> createTreeview() {
         TreeView<String> treeView = new TreeView<>();
 
@@ -203,18 +228,18 @@ public class TervController  implements Initializable {
 
     @FXML
     void slideOut(){
-        paneSlide.setVisible(true);
+        cetliMuhelyPane.setVisible(true);
         slideOutButton.setVisible(false);
         slideInButton.setVisible(true);
 
         System.out.println("slideOut");
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
-        slide.setNode(paneSlide);
+        slide.setNode(cetliMuhelyPane);
 
         slide.setToX(0);
         slide.play();
-        paneSlide.setTranslateX(paneSlide.getWidth());
+        cetliMuhelyPane.setTranslateX(cetliMuhelyPane.getWidth());
         slide.setOnFinished((ActionEvent e) -> {
 
         });
@@ -228,11 +253,11 @@ public class TervController  implements Initializable {
         System.out.println("slideIn");
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
-        slide.setNode(paneSlide);
+        slide.setNode(cetliMuhelyPane);
 
-        slide.setToX(paneSlide.getWidth());
+        slide.setToX(cetliMuhelyPane.getWidth());
         slide.play();
-        paneSlide.setTranslateX(0);
+        cetliMuhelyPane.setTranslateX(0);
         slide.setOnFinished((ActionEvent e) -> {
 
         });

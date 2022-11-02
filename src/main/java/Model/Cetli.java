@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Cetli is a note card in which we store a Task we want to do
- * and other useful information about the task.
+ * and other useful information about the mainTask.
  *
  */
 public class Cetli {
@@ -23,7 +23,9 @@ public class Cetli {
     /**
      * The description of the Task we want to do.
      */
-    private String task;
+    private String mainTask;
+
+    private String taskTree;
     /**
      * if The Task is Finished
      */
@@ -74,9 +76,9 @@ public class Cetli {
      * @see CetliContainer
      * and also call scheduledExecutor
      */
-    public Cetli() {
+    public Cetli(int i, String s, String red, String s1, int i1, int i2) {
         this.iD = numberOfInstance++;
-        this.task = "Empty Task";
+        this.mainTask = "Empty Task";
         this.priorityLevel = PriorityLevel.Green;
         //this.deadLine = DeadLine.BeforeIDie;
         this.deadLine = LocalDateTime.now().plusSeconds(10);
@@ -89,20 +91,28 @@ public class Cetli {
      * @see CetliContainer
      * and also call scheduledExecutor
      */
-    public Cetli(int iD, String task, String priorityLevel, String deadLine) {
+    public Cetli(int iD, String mainTask, String priorityLevel, String deadLine) {
         this.iD = iD;
-        this.task = task;
+        this.mainTask = mainTask;
         this.priorityLevel = PriorityLevel.valueOf(priorityLevel);
         //this.deadLine = deadLine;
         this.deadLine = LocalDateTime.parse(deadLine,HelloApplication.formatter);
+
+        Tree.Node root = new Tree.Node<>(mainTask);
+        this.taskTree = "taskTree";
+
         CetliContainer.add(this);
         scheduledExecutor();
+    }
+    public Cetli(int iD, String mainTask, String priorityLevel, String deadLine,String taskTree) {
+        this(iD,mainTask,priorityLevel,deadLine);
+        this.taskTree = "taskTree";
     }
 
 
     @Override
     public String toString(){
-        return this.iD +" "+this.task+" "+this.priorityLevel+" "+this.getDeadLine()+" "+this.isFinished+" "+this.isDeadLineOver;
+        return this.iD +" "+this.mainTask +" "+this.priorityLevel+" "+this.getDeadLine()+" "+this.isFinished+" "+this.isDeadLineOver;
     }
 
     class Task implements Runnable {
@@ -121,12 +131,12 @@ public class Cetli {
         this.iD = iD;
     }
 
-    public String getTask() {
-        return task;
+    public String getMainTask() {
+        return mainTask;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public void setMainTask(String mainTask) {
+        this.mainTask = mainTask;
     }
 
     public boolean isFinished() {
@@ -165,5 +175,10 @@ public class Cetli {
     }
     public String getDeadLineString() {
         return deadLine.format(HelloApplication.formatter);
+    }
+    public String getTaskTree() {
+
+        return "Tree";
+        //return taskTree;
     }
 }

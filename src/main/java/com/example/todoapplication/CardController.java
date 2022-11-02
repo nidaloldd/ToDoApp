@@ -19,27 +19,21 @@ public class CardController {
     private ImageView priorityImage;
 
     public void setData(Cetli cetli) {
-        taskName.setText(cetli.getTask());
+        taskName.setText(cetli.getMainTask());
         dateLabel.setText(cetli.getDeadLineString());
 
         Image star = new Image(getClass().getResourceAsStream("/img/stars/star.png"));
         switch (cetli.getPriorityLevel()){
-            case Red -> {
-                star = new Image(getClass().getResourceAsStream("/img/stars/starRed.png"));
-            }
-            case Yellow -> {
-                star = new Image(getClass().getResourceAsStream("/img/stars/starYellow.png"));
-            }
-            case Green -> {
-                star = new Image(getClass().getResourceAsStream("/img/stars/starGreen.png"));
-            }
+            case Red -> star = new Image(getClass().getResourceAsStream("/img/stars/starRed.png"));
+            case Yellow -> star = new Image(getClass().getResourceAsStream("/img/stars/starYellow.png"));
+            case Green -> star = new Image(getClass().getResourceAsStream("/img/stars/starGreen.png"));
+
         }
         priorityImage = new ImageView(star);
-        taskTree = createTreeview();
+        taskTree = createTreeView();
 
     }
-
-    private TreeView<String> createTreeview() {
+    private TreeView<String> createTreeView() {
         TreeView<String> treeView = new TreeView<>();
 
         TreeItem<String> rootItem = new TreeItem<>("Files" , new CheckBox());
@@ -65,7 +59,7 @@ public class CardController {
         treeView.setOnMouseClicked(e -> {
             treeView.setPrefHeight(treeView.getExpandedItemCount()*25);
 
-            TreeItem<String> item = (TreeItem<String>) treeView.getSelectionModel().getSelectedItem();
+            TreeItem<String> item = treeView.getSelectionModel().getSelectedItem();
             if(item != null) {
                 System.out.println(item.getValue());
             }
@@ -76,4 +70,6 @@ public class CardController {
 
         return treeView;
     }
+
+
 }
