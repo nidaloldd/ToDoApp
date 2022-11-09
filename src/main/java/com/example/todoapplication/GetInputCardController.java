@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 
 
 public class GetInputCardController implements Initializable {
+    @FXML
     public ImageView priorityImage;
     @FXML
     private TextField mainTaskText;
@@ -48,11 +50,23 @@ public class GetInputCardController implements Initializable {
         rootAddButton.setOnMouseClicked(e -> {
             createNewSubTask(rootVbox);
         });
+
+
     }
     public void setComboBoxValues(){
         priorityChoice.getItems().add(PriorityLevel.Red);
         priorityChoice.getItems().add(PriorityLevel.Yellow);
         priorityChoice.getItems().add(PriorityLevel.Green);
+
+        priorityChoice.setOnAction(e -> {
+            Image star = new Image(getClass().getResourceAsStream("/img/stars/star.png"));
+            switch (priorityChoice.getValue()){
+                case Red -> star = new Image(getClass().getResourceAsStream("/img/stars/starRed.png"));
+                case Yellow -> star = new Image(getClass().getResourceAsStream("/img/stars/starYellow.png"));
+                case Green -> star = new Image(getClass().getResourceAsStream("/img/stars/starGreen.png"));
+            }
+            priorityImage.setImage(star);
+        });
 
         for (int i = 0; i < 24; i++) {
             hourBox.getItems().add(i);
