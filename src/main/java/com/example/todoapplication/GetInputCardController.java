@@ -3,15 +3,27 @@ package com.example.todoapplication;
 import Model.Cetli;
 import Model.PriorityLevel;
 import Model.Tree;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ResourceBundle;
 
-import static com.example.todoapplication.HelloApplication.db;
 
-public class GetInputCardController {
+public class GetInputCardController implements Initializable {
+    public ImageView priorityImage;
     @FXML
     private TextField mainTaskText;
     @FXML
@@ -24,7 +36,19 @@ public class GetInputCardController {
     private ComboBox<Integer> hourBox;
     @FXML
     private ComboBox<Integer> minuteBox;
+    @FXML
+    private Button rootAddButton, rootRemoveButton;
+    @FXML
+    private VBox rootVbox;
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1){
+
+        setComboBoxValues();
+        rootAddButton.setOnMouseClicked(e -> {
+            createNewSubTask(rootVbox);
+        });
+    }
     public void setComboBoxValues(){
         priorityChoice.getItems().add(PriorityLevel.Red);
         priorityChoice.getItems().add(PriorityLevel.Yellow);
@@ -44,9 +68,48 @@ public class GetInputCardController {
                 LocalDateTime.of(datePicker.getValue(), LocalTime.of(hourBox.getValue(), minuteBox.getValue())).format(HelloApplication.formatter),
                 "TTAskTree");
 
-
-        db.addContact(newCetli);
+        //db.addContact(newCetli);
         HelloApplication.Cetlik.add(newCetli);
+    }
+
+    public void createNewSubTask(VBox parent){
+
+        HBox nodeBox = new HBox();
+        TextField task = new TextField();
+        task.setPromptText("SubTask");
+        task.setAlignment(Pos.CENTER);
+        task.setPrefWidth(150);
+        task.setPrefHeight(25);
+        Button addButton = new Button("+");
+        Button removeButton = new Button("-");
+        VBox vBoxContainer = new VBox();
+        nodeBox.getChildren().addAll(task,addButton,removeButton,vBoxContainer);
+
+
+        addButton.setPrefWidth(30);
+        addButton.setPrefHeight(10);
+        removeButton.setPrefWidth(30);
+        removeButton.setPrefHeight(10);
+
+
+
+        parent.getChildren().add(nodeBox);
+
+        //hBox.setMargin(hbox, new Insets(30));
+        addButton.setOnMouseClicked(e -> {
+            createNewSubTask(vBoxContainer);
+
+            removeButton.setOnMouseClicked(ee -> {
+                removeSubTask(vBoxContainer);
+            });
+        });
+
 
     }
+    public void removeSubTask(VBox parent){
+        System.out.print("removeSubTask");
+        parent.getChildren().clear();
+    }
+
+
 }

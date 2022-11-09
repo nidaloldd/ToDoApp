@@ -51,7 +51,7 @@ public class ToDoController {
         setDeadLineCol(deadLineCol);
 
         table.getColumns().addAll(taskCol, priorityCol, deadLineCol);
-        Cetlik.addAll(HelloApplication.db.getAllContacts());
+        //Cetlik.addAll(HelloApplication.db.getAllContacts());
         table.setItems(Cetlik);
 
 
@@ -116,7 +116,7 @@ public class ToDoController {
     public void clickDeleteButton(ActionEvent actionEvent) {
         Cetli selectedTask = table.getSelectionModel().getSelectedItem();
         table.getItems().remove(selectedTask);
-        HelloApplication.db.removeContact(selectedTask);
+       // HelloApplication.db.removeContact(selectedTask);
     }
 
     public void clickAddButton(ActionEvent actionEvent) {
@@ -124,7 +124,7 @@ public class ToDoController {
                 priorityLevelPicker.getValue().toString(),
                 LocalDateTime.of(datePicker.getValue(), LocalTime.of(hourPicker.getValue(), minutePicker.getValue())).format(HelloApplication.formatter));
 
-        HelloApplication.db.addContact(newCetli);
+        //HelloApplication.db.addContact(newCetli);
         Cetlik.add(newCetli);
     }
 }

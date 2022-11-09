@@ -2,9 +2,13 @@ package com.example.todoapplication;
 
 import Model.Cetli;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class CardController {
     @FXML
@@ -14,7 +18,7 @@ public class CardController {
     @FXML
     private Label dateLabel;
     @FXML
-    private Button expandButton;
+    private Button expandButton ,deleteButton;
     @FXML
     private ImageView priorityImage;
 
@@ -29,10 +33,10 @@ public class CardController {
             case Green -> star = new Image(getClass().getResourceAsStream("/img/stars/starGreen.png"));
 
         }
-        priorityImage = new ImageView(star);
-        taskTree = createTreeView();
+        priorityImage.setImage(star);
 
     }
+    /*
     private TreeView<String> createTreeView() {
         TreeView<String> treeView = new TreeView<>();
 
@@ -70,6 +74,8 @@ public class CardController {
 
         return treeView;
     }
+
+     */
 
 
 }

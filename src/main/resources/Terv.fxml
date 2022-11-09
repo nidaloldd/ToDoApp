@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" styleClass="parent" stylesheets="@newStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todoapplication.TervController">
    <children>
@@ -26,12 +25,12 @@
       </ScrollPane>
       <AnchorPane id="cetliMuhelyPane" fx:id="cetliMuhelyPane" layoutY="30.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="CETLI MÜHELY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="CETLI MuHELY" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Bradley Hand ITC" size="55.0" />
                </font>
             </Label>
-            <TilePane id="inputCetliPane" fx:id="inputCetliPane" alignment="CENTER" prefHeight="470.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TilePane id="inputCetliPane" fx:id="inputCetliPane" alignment="CENTER" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="65.0" />
             <Button mnemonicParsing="false" onAction="#clickAddButton" prefHeight="20.0" prefWidth="300.0" text="Create" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <font>
                   <Font size="20.0" />

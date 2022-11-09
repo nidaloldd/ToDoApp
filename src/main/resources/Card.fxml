@@ -10,18 +10,7 @@
 
 <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="227.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todoapplication.CardController">
    <children>
-      <BorderPane layoutX="30.0" layoutY="25.0" prefHeight="200.0" prefWidth="320.0" style="-fx-border-width: 5; -fx-border-color: black; -fx-border-radius: 10;">
-         <bottom>
-            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </BorderPane.margin>
-               <children>
-                  <Label id="dateLabel" fx:id="dateLabel" prefHeight="17.0" prefWidth="170.0" text="2022.10.27. 10:00" />
-                  <Button id="expandButton" fx:id="expandButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Button" textAlignment="CENTER" />
-               </children>
-            </HBox>
-         </bottom>
+      <BorderPane layoutX="30.0" layoutY="25.0" prefHeight="200.0" prefWidth="320.0" style="-fx-border-width: 5; -fx-border-color: black; -fx-border-radius: 10; -fx-background-color: #A5C9CA;">
          <center>
             <TreeView id="taskTree" fx:id="taskTree" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="248.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -39,18 +28,30 @@
                </font>
             </Label>
          </top>
+         <bottom>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <Label id="dateLabel" fx:id="dateLabel" alignment="CENTER" text="2022.10.27. 10:00" />
+                  <Button id="expandButton" fx:id="expandButton" alignment="CENTER" layoutX="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="close-btn" text="&gt;" textAlignment="CENTER" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" />
+               </BorderPane.margin>
+            </Pane>
+         </bottom>
       </BorderPane>
       <ImageView id="priorityImage" fx:id="priorityImage" fitHeight="79.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D height="10.0" />
          </viewport>
-         <effect>
-            <Lighting bumpInput="$null" diffuseConstant="1.05" specularConstant="0.47" specularExponent="26.05" surfaceScale="3.84">
-               <light>
-                  <Light.Distant color="RED" />
-               </light>
-            </Lighting>
-         </effect>
+         <image>
+            <Image url="@img/stars/starYellow.png" />
+         </image>
       </ImageView>
+      <Button id="deleteButton" fx:id="deleteButton" layoutX="310.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="close-btn" stylesheets="@newStyle.css" text="X">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

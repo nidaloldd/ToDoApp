@@ -178,7 +178,7 @@ public class TervController  implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/getInputCard.fxml"));
             Node node = fxmlLoader.load();
             getInputCardController = fxmlLoader.getController();
-            getInputCardController.setComboBoxValues();
+
 
             return  node;
 
