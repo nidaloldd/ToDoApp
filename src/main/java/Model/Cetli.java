@@ -8,14 +8,14 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Cetli is a note card in which we store a Task we want to do
- * and other useful information about the mainTask.
+ * and other useful information about the task.
  *
  */
 public class Cetli {
     /**
      * the numberOfInstance gives us the iD of the object.
      */
-    private static int numberOfInstance = 0;
+    private static int numberOfInstance = 100;
     /**
      * Special unique identifier of the Cetli.
      */
@@ -23,9 +23,10 @@ public class Cetli {
     /**
      * The description of the Task we want to do.
      */
-    private String mainTask;
 
-    private String taskTree;
+    private String parent;
+
+    private String task;
     /**
      * if The Task is Finished
      */
@@ -42,6 +43,8 @@ public class Cetli {
 
     private LocalDateTime deadLine;
 
+    private LocalDateTime dated;
+
     /**
      * This Method is only called if the Task is passed the deadline.
      */
@@ -54,7 +57,7 @@ public class Cetli {
      *
      */
     public void scheduledExecutor(){
-        System.out.println("scheduledExecutor Start:"+ iD + " at:" + LocalDateTime.now().toString());
+        System.out.println("scheduledExecutor Start:"+ iD + " at:" + LocalDateTime.now());
 
         ScheduledExecutorService scheduler
                 = Executors.newScheduledThreadPool(11);
@@ -76,14 +79,15 @@ public class Cetli {
      * @see CetliContainer
      * and also call scheduledExecutor
      */
-    public Cetli(int i, String s, String red, String s1, int i1, int i2) {
-        this.iD = numberOfInstance++;
-        this.mainTask = "Empty Task";
+    public Cetli() {
+        this.task = "Empty Task";
+        this.parent = "root";
         this.priorityLevel = PriorityLevel.Green;
         //this.deadLine = DeadLine.BeforeIDie;
         this.deadLine = LocalDateTime.now().plusSeconds(10);
+        this.dated = LocalDateTime.now();
         CetliContainer.add(this);
-        scheduledExecutor();
+        //scheduledExecutor();
     }
     /**
      * pass the given values and
@@ -91,28 +95,20 @@ public class Cetli {
      * @see CetliContainer
      * and also call scheduledExecutor
      */
-    public Cetli(int iD, String mainTask, String priorityLevel, String deadLine) {
-        this.iD = iD;
-        this.mainTask = mainTask;
+    public Cetli(String task, String parent, String priorityLevel, String deadLine, String dated) {
+        this.task = task;
+        this.parent = parent;
         this.priorityLevel = PriorityLevel.valueOf(priorityLevel);
         //this.deadLine = deadLine;
-        this.deadLine = LocalDateTime.parse(deadLine,HelloApplication.formatter);
-
-        Tree.Node root = new Tree.Node<>(mainTask);
-        this.taskTree = "taskTree";
-
+        this.deadLine = LocalDateTime.parse(deadLine, HelloApplication.formatter);
+        this.dated = LocalDateTime.parse(dated, HelloApplication.formatter);
         CetliContainer.add(this);
-        scheduledExecutor();
+        //scheduledExecutor();
     }
-    public Cetli(int iD, String mainTask, String priorityLevel, String deadLine,String taskTree) {
-        this(iD,mainTask,priorityLevel,deadLine);
-        this.taskTree = "taskTree";
-    }
-
 
     @Override
     public String toString(){
-        return this.iD +" "+this.mainTask +" "+this.priorityLevel+" "+this.getDeadLine()+" "+this.isFinished+" "+this.isDeadLineOver;
+        return this.iD +" "+this.task+" "+this.parent+" "+this.priorityLevel+" "+this.getDeadLine()+" "+this.isFinished+" "+this.isDeadLineOver;
     }
 
     class Task implements Runnable {
@@ -131,12 +127,12 @@ public class Cetli {
         this.iD = iD;
     }
 
-    public String getMainTask() {
-        return mainTask;
+    public String getTask() {
+        return task;
     }
 
-    public void setMainTask(String mainTask) {
-        this.mainTask = mainTask;
+    public void setTask(String task) {
+        this.task = task;
     }
 
     public boolean isFinished() {
@@ -165,20 +161,32 @@ public class Cetli {
         this.priorityLevel = priorityLevel;
     }
 
+    public String getParent() {
+        return parent;
+    }
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
     public LocalDateTime getDeadLine() {
         return deadLine;
+    }
+    public String getDeadLineString() {
+        return deadLine.format(HelloApplication.formatter);
+    }
+
+    public LocalDateTime getDated() {
+        return dated;
+    }
+    public String getDatedString() {
+        return dated.format(HelloApplication.formatter);
     }
 
     public void setDeadLine(LocalDateTime deadLine) {
         scheduledExecutor();
         this.deadLine = deadLine;
     }
-    public String getDeadLineString() {
-        return deadLine.format(HelloApplication.formatter);
-    }
-    public String getTaskTree() {
-
-        return "Tree";
-        //return taskTree;
+    public void setDated(LocalDateTime dated) {
+        this.dated = dated;
     }
 }

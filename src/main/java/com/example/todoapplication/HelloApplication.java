@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/Terv.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Main.fxml"));
 
         primaryStage.setScene(new Scene(root));
 

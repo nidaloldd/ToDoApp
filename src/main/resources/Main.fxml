@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="650.0" styleClass="parent" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todoapplication.MainController">
+    <children>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="40.0" text="ToDo APP" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font name="Bradley Hand ITC" size="55.0" />
+            </font>
+        </Label>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-border-width: 3; -fx-border-color: black;" vbarPolicy="NEVER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
+            <content>
+                <TilePane id="tilePane" fx:id="tilePane" alignment="CENTER" styleClass="container">
+                    <effect>
+                        <InnerShadow color="#00000081" height="20.0" offsetX="10.0" radius="12.0" width="30.0" />
+                    </effect>
+                </TilePane>
+            </content>
+        </ScrollPane>
+        <AnchorPane id="cetliMuhelyPane" fx:id="cetliMuhelyPane" layoutY="27.0" prefHeight="473.0" prefWidth="600.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" text="CETLI MuHELY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <font>
+                        <Font name="Bradley Hand ITC" size="55.0" />
+                    </font>
+                </Label>
+                <TilePane id="inputCetliPane" fx:id="inputCetliPane" alignment="CENTER" prefHeight="350.0" prefWidth="500.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="65.0" />
+                <Button fx:id="addButton" mnemonicParsing="false" onAction="#clickAddButton" prefHeight="20.0" prefWidth="300.0" text="Create" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Button fx:id="slideOutButton" layoutX="158.0" layoutY="130.0" mnemonicParsing="false" onAction="#slideOut" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="slideInButton" layoutX="158.0" layoutY="130.0" mnemonicParsing="false" onAction="#slideIn" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <HBox fx:id="topBar" alignment="TOP_RIGHT" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#minimizeStage" prefWidth="50.0" styleClass="min-btn" text="-" textFill="WHITE">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="184.0" layoutY="10.0" onMouseClicked="#closeApp" prefWidth="70.0" styleClass="close-btn" text="X" textFill="WHITE">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+        <AnchorPane fx:id="expandedTaskPane" prefHeight="473.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+            <children>
+                <SplitPane dividerPositions="0.47157190635451507" prefHeight="470.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="498.0" prefWidth="271.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                            <children>
+                                                <Label fx:id="taskLabel" alignment="CENTER" prefHeight="50.0" text="TASK NAME" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="25.0" />
+                                                    </font>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                                    <children>
+                                                        <Label text="Priority Level:">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="priorityLabel" text="Label">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                                                    <children>
+                                                        <Label text="Deadline:">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="deadlineLabel" text="Label">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                                <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                                                <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                                                <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                            <children>
+                                                <Label prefHeight="50.0" text="MAIN TASK:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                                                <TilePane fx:id="mainTaskTilePane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+                                            </children>
+                                        </AnchorPane>
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <Label prefHeight="50.0" text="SUBTASKS:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="5.0" />
+                                    </padding>
+                                </Label>
+                                <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                                <Button fx:id="exitButton" mnemonicParsing="false" onAction="#clickExitButton" prefHeight="40.0" text="Exit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Button>
+                                <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+                                    <content>
+                                        <TilePane fx:id="subTasksTilePane" prefHeight="373.0" prefWidth="318.0">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TilePane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </children></AnchorPane>
+    </children>
+</AnchorPane>

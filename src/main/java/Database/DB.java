@@ -51,10 +51,10 @@ public class DB {
         }
 
         try {
-            ResultSet rs = dbmd.getTables(null, "APP", "CONTACTS", null);
+            ResultSet rs = dbmd.getTables(null, "APP", "TODO", null);
             if(!rs.next())
             {
-                createStatement.execute("create table contacts(id INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),task varchar(20), priorityLevel varchar(20), deadLine varchar(30), taskTree varchar(30))");
+                createStatement.execute("create table todo(task varchar(20), parent varchar(20), priorityLevel varchar(20), deadLine varchar(20), dated varchar(20))");
             }
         } catch (SQLException ex) {
             System.out.println("Valami baj van az adattáblák létrehozásakor.");
@@ -62,68 +62,69 @@ public class DB {
         }
     }
 
-    public ArrayList<Cetli> getAllContacts(){
-        String sql = "select * from contacts";
-        ArrayList<Cetli> users = null;
+    public ArrayList<Cetli> getAllToDo(){
+        String sql = "select * from todo";
+        ArrayList<Cetli> tasks = null;
         try {
             ResultSet rs = createStatement.executeQuery(sql);
-            users = new ArrayList<>();
+            tasks = new ArrayList<>();
 
             while (rs.next()){
-                Cetli actualCetli = new Cetli(rs.getInt("iD"),rs.getString("task"),rs.getString("priorityLevel"),rs.getString("DeadLine"), rs.getString("taskTree"));
-                users.add(actualCetli);
+                Cetli actualCetli = new Cetli(rs.getString("task"),rs.getString("parent"),rs.getString("priorityLevel"),rs.getString("deadline"),rs.getString("dated"));
+                tasks.add(actualCetli);
             }
         } catch (SQLException ex) {
-            System.out.println("Valami baj van a userek kiolvasásakor");
+            System.out.println("Valami baj van a taskok kiolvasásakor");
             System.out.println(""+ex);
         }
-        return users;
+        return tasks;
     }
 
-    public void addContact(Cetli cetli){
+    public void addTask(Cetli cetli){
         try {
-            String sql = "insert into contacts (task, priorityLevel, deadLine, taskTree) values (?,?,?,?)";
+            String sql = "insert into todo (task, parent, priorityLevel, deadLine, dated) values (?,?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, cetli.getMainTask());
-            preparedStatement.setString(2, cetli.getPriorityLevelString());
-            preparedStatement.setString(3, cetli.getDeadLineString());
-            preparedStatement.setString(4, cetli.getTaskTree());
+            preparedStatement.setString(1, cetli.getTask());
+            preparedStatement.setString(2, cetli.getParent());
+            preparedStatement.setString(3, cetli.getPriorityLevelString());
+            preparedStatement.setString(4, cetli.getDeadLineString());
+            preparedStatement.setString(5, cetli.getDatedString());
 
 
             preparedStatement.execute();
 
 
         } catch (SQLException ex) {
-            System.out.println("Valami baj van a contact hozzáadásakor");
+            System.out.println("Valami baj van a task hozzáadásakor");
             System.out.println(""+ex);
         }
     }
 
-    public void updateContact(Cetli cetli){
+    public void updateTask(Cetli cetli){
         try {
-            String sql = "update contacts set task = ?, priorityLevel = ? , deadLine = ? where id = ?";
+            String sql = "update todo set task = ?, parent = ?, priorityLevel = ? , deadLine = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, cetli.getMainTask());
-            preparedStatement.setString(2, cetli.getPriorityLevelString());
-            preparedStatement.setString(3, cetli.getDeadLineString());
-            preparedStatement.setInt(4, cetli.getID());
+            preparedStatement.setString(1, cetli.getTask());
+            preparedStatement.setString(2, cetli.getParent());
+            preparedStatement.setString(3, cetli.getPriorityLevelString());
+            preparedStatement.setString(4, cetli.getDeadLineString());
             preparedStatement.execute();
         } catch (SQLException ex) {
-            System.out.println("Valami baj van a contact hozzáadásakor");
+            System.out.println("Valami baj van a task hozzáadásakor");
             System.out.println(""+ex);
         }
     }
 
-    public void removeContact(Cetli cetli){
+    public void removeTask(Cetli cetli){
         try {
-            String sql = "delete from contacts where id = ?";
+            String sql = "delete from todo where task = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, cetli.getID());
+            preparedStatement.setString(1, cetli.getTask());
             preparedStatement.execute();
         } catch (SQLException ex) {
-            System.out.println("Valami baj van a contact törlésekor");
+            System.out.println("Valami baj van a task törlésekor");
             System.out.println(""+ex);
         }
     }
-
+    
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todoapplication.CreateTaskController">
+    <children>
+        <VBox layoutX="38.0" layoutY="38.0" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-border-radius: 10; -fx-border-width: 5; -fx-border-color: black; -fx-background-color: #FFECDE; -fx-background-radius: 20;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="38.0">
+            <children>
+              <TextField fx:id="inputTask" promptText="Enter a task ...">
+                  <font>
+                      <Font name="System Bold" size="20.0" />
+                  </font>
+              </TextField>
+                <ComboBox fx:id="parentPicker" prefWidth="200.0" promptText="Choose Parent" />
+                <ComboBox fx:id="priorityPicker" prefWidth="200.0" promptText="Choose Priority" styleClass="combo-box" />
+                <DatePicker fx:id="datePicker" prefWidth="200.0" promptText="Choose Date" />
+                <ComboBox fx:id="hourPicker" prefWidth="200.0" promptText="Choose Hour" styleClass="combo-box" />
+                <ComboBox fx:id="minutePicker" prefWidth="200.0" promptText="Choose Minute" styleClass="combo-box" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+      <ImageView fx:id="priorityImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane fx:id="alertPane" layoutX="12.0" layoutY="11.0" prefHeight="350.0" prefWidth="500.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane layoutX="38.0" layoutY="38.0" opacity="0.7" prefHeight="305.0" prefWidth="505.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
+            <VBox alignment="CENTER" layoutX="36.0" layoutY="38.0" prefHeight="305.0" prefWidth="505.0" spacing="20.0">
+               <children>
+                  <Label fx:id="alertLabel" alignment="CENTER" text="Warning" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="alertButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickAlertButton" prefWidth="100.0" text="OK">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

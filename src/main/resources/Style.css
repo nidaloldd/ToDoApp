@@ -1,0 +1,44 @@
+
+.parent{
+    -fx-background-color:  #2C3333;
+}
+.container{
+    -fx-background-color:  #395B64;
+}
+.card{
+    -fx-background-color:  #A5C9CA;
+}
+
+
+.close-btn:hover{
+    -fx-background-color: #E81123;
+}
+.min-btn:hover{
+    -fx-background-color: #171717;
+}
+.delete-btn{
+    -fx-background-color: red;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-border-radius: 15;
+    -fx-background-radius: 20;
+}
+.subtask-btn{
+    -fx-background-color: cyan;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-border-radius: 15;
+    -fx-background-radius: 20;
+}
+.taskPane{
+    -fx-border-width: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-background-radius: 30;
+    -fx-background-color: darkgray;
+}
+.deleteAll-btn{
+    -fx-background-color: red;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+}
