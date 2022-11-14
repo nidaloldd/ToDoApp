@@ -118,7 +118,6 @@ public class MainController {
         ArrayList<Cetli> data = HelloApplication.db.getAllToDo();
         tilePane.getChildren().clear();
         for (Cetli c : data) {
-            System.out.println(c);
             tilePane.getChildren().add(createCetliFxml(c));
         }
     }
