@@ -2,6 +2,7 @@ package Model;
 import com.example.todoapplication.HelloApplication;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -188,5 +189,13 @@ public class Cetli {
     }
     public void setDated(LocalDateTime dated) {
         this.dated = dated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cetli cetli = (Cetli) o;
+        return iD == cetli.iD && isFinished == cetli.isFinished && isDeadLineOver == cetli.isDeadLineOver && Objects.equals(parent, cetli.parent) && Objects.equals(task, cetli.task) && priorityLevel == cetli.priorityLevel && Objects.equals(deadLine, cetli.deadLine) && Objects.equals(dated, cetli.dated);
     }
 }

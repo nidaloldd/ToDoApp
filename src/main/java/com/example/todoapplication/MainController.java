@@ -1,13 +1,17 @@
 package com.example.todoapplication;
 
 import Model.Cetli;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +23,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainController {
     @FXML
@@ -51,6 +59,9 @@ public class MainController {
 
     private double xOffset=0,yOffset=0;
     CreateTaskController createTaskController;
+    Timeline notificationTimer=new Timeline(new KeyFrame(Duration.seconds(5),event -> notification()));
+    List<Cetli> noticationDone = new ArrayList<>();
+    List<Cetli> deadLineOver = new ArrayList<>();
 
     public void initialize(){
         //makeDraggable(HelloApplication.stage, rootPane);
@@ -71,8 +82,50 @@ public class MainController {
         slideInButton.setVisible(true);
 
         setInputTaskPane();
+        notificationTimer.play();
 
     }
+
+    @FXML
+    private void notification(){
+        Timer timer=new Timer();
+        TimerTask timerTask=new TimerTask() {
+            @Override
+            public void run() {
+                ArrayList<Cetli> data = HelloApplication.db.getAllToDo();
+                for (Cetli cetli:data) {
+                    long delay = minusLocalDateTime(cetli.getDeadLine(), LocalDateTime.now());
+                    long timeForTask = minusLocalDateTime(cetli.getDeadLine(), cetli.getDated());
+                    if (timeForTask * 0.3 >= delay && delay>0 && !noticationDone.contains(cetli)) {
+                        Platform.runLater(()->{
+                        var alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Do it!");
+                        alert.setContentText(cetli.getTask() + " have to be done soon!");
+                        alert.showAndWait();
+                        noticationDone.add(cetli);
+                        });
+                    }
+                    if (delay<=0 && !deadLineOver.contains(cetli)) {
+                        Platform.runLater(()->{
+                            var alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Did you forget it?");
+                            alert.setContentText(cetli.getTask() + " needed to be done by now!");
+                            alert.showAndWait();
+                            deadLineOver.add(cetli);
+                        });
+                    }
+                }
+            }
+        };
+        timer.schedule(timerTask,0,5*1000);
+    }
+
+    private long minusLocalDateTime(LocalDateTime minuend,LocalDateTime subtrahend){
+        return (minuend.getSecond()+minuend.getMinute()*60+minuend.getHour()*60*60+minuend.getDayOfMonth()*60*60*24
+                +(long) minuend.getYear()*60*60*24*365)-(subtrahend.getSecond()+subtrahend.getMinute()*60+subtrahend.getHour()*60*60
+                +subtrahend.getDayOfMonth()*60*60*24+ (long) subtrahend.getYear() *60*60*24*365);
+    }
+
     public void setExpandedTaskPaneValues(){
         ArrayList<Cetli> data = HelloApplication.db.getAllToDo();
         expandedTaskPane.setVisible(true);
