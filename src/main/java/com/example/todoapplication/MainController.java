@@ -247,7 +247,8 @@ public class MainController {
     }
     @FXML
     public void closeApp() {
-        System.exit(0);
+        HelloApplication.stage.close();
+//        System.exit(0);
     }
 
     public void clickAddButton() {

@@ -1,13 +1,18 @@
 package com.example.todoapplication;
 
-import Database.DB;
+import  Database.DB;
 import Model.Cetli;
+import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.time.format.DateTimeFormatter;
@@ -31,11 +36,12 @@ public class HelloApplication extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("TODO App");
         primaryStage.setResizable(true);
-
-        primaryStage.show();
+//      not needed with trayToBackHelper
+//      primaryStage.show();
+        ApplicationWidgetizer.trayToBackHelper(primaryStage);
         ResizeHelper.addResizeListener(stage);
-
-
+//        ApplicationWidgetizer.Widgetizer(stage);
+        ApplicationWidgetizer.createTrayIcon(stage);
     }
 
     public static void main(String[] args) {
