@@ -24,6 +24,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -94,15 +95,15 @@ public class MainController {
             public void run() {
                 ArrayList<Cetli> data = HelloApplication.db.getAllToDo();
                 for (Cetli cetli:data) {
-                    long delay = minusLocalDateTime(cetli.getDeadLine(), LocalDateTime.now());
-                    long timeForTask = minusLocalDateTime(cetli.getDeadLine(), cetli.getDated());
+                    long delay = ChronoUnit.SECONDS.between(LocalDateTime.now(),cetli.getDeadLine());
+                    long timeForTask = ChronoUnit.SECONDS.between(cetli.getDated(),cetli.getDeadLine());
                     if (timeForTask * 0.3 >= delay && delay>0 && !noticationDone.contains(cetli)) {
                         Platform.runLater(()->{
                         var alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setHeaderText("Do it!");
                         alert.setContentText(cetli.getTask() + " have to be done soon!");
-                        alert.showAndWait();
                         noticationDone.add(cetli);
+                        alert.showAndWait();
                         });
                     }
                     if (delay<=0 && !deadLineOver.contains(cetli)) {
@@ -110,8 +111,8 @@ public class MainController {
                             var alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setHeaderText("Did you forget it?");
                             alert.setContentText(cetli.getTask() + " needed to be done by now!");
-                            alert.showAndWait();
                             deadLineOver.add(cetli);
+                            alert.showAndWait();
                         });
                     }
                 }
