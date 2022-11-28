@@ -60,9 +60,7 @@ public class MainController {
 
     private double xOffset=0,yOffset=0;
     CreateTaskController createTaskController;
-    Timeline notificationTimer=new Timeline(new KeyFrame(Duration.seconds(5),event -> notification()));
-    List<Cetli> noticationDone = new ArrayList<>();
-    List<Cetli> deadLineOver = new ArrayList<>();
+
 
     public void initialize(){
         //makeDraggable(HelloApplication.stage, rootPane);
@@ -83,48 +81,7 @@ public class MainController {
         slideInButton.setVisible(true);
 
         setInputTaskPane();
-        notificationTimer.play();
 
-    }
-
-    @FXML
-    private void notification(){
-        Timer timer=new Timer();
-        TimerTask timerTask=new TimerTask() {
-            @Override
-            public void run() {
-                ArrayList<Cetli> data = HelloApplication.db.getAllToDo();
-                for (Cetli cetli:data) {
-                    long delay = ChronoUnit.SECONDS.between(LocalDateTime.now(),cetli.getDeadLine());
-                    long timeForTask = ChronoUnit.SECONDS.between(cetli.getDated(),cetli.getDeadLine());
-                    if (timeForTask * 0.3 >= delay && delay>0 && !noticationDone.contains(cetli)) {
-                        Platform.runLater(()->{
-                        var alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setHeaderText("Do it!");
-                        alert.setContentText(cetli.getTask() + " have to be done soon!");
-                        noticationDone.add(cetli);
-                        alert.showAndWait();
-                        });
-                    }
-                    if (delay<=0 && !deadLineOver.contains(cetli)) {
-                        Platform.runLater(()->{
-                            var alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setHeaderText("Did you forget it?");
-                            alert.setContentText(cetli.getTask() + " needed to be done by now!");
-                            deadLineOver.add(cetli);
-                            alert.showAndWait();
-                        });
-                    }
-                }
-            }
-        };
-        timer.schedule(timerTask,0,5*1000);
-    }
-
-    private long minusLocalDateTime(LocalDateTime minuend,LocalDateTime subtrahend){
-        return (minuend.getSecond()+minuend.getMinute()*60+minuend.getHour()*60*60+minuend.getDayOfMonth()*60*60*24
-                +(long) minuend.getYear()*60*60*24*365)-(subtrahend.getSecond()+subtrahend.getMinute()*60+subtrahend.getHour()*60*60
-                +subtrahend.getDayOfMonth()*60*60*24+ (long) subtrahend.getYear() *60*60*24*365);
     }
 
     public void setExpandedTaskPaneValues(){
