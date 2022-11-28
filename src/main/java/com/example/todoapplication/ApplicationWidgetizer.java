@@ -13,6 +13,7 @@ public class ApplicationWidgetizer {
 
             // make the widget app always (mostly) stay behind all applications
 
+
             public static void trayToBackHelper(Stage stage) {
                 stage.show();
                 stage.toBack();
@@ -21,6 +22,7 @@ public class ApplicationWidgetizer {
 
             // create the icon on the system tray, initialize the functionalities on the menus
             public static void createTrayIcon(Stage stage) {
+                stage.setOnShowing(e -> stage.toBack());
                 FXTrayIcon trayIcon = new FXTrayIcon.Builder(stage,ApplicationWidgetizer.class.getResource("/img/tray_icon.png"))
 //                        .addTitleItem(true)
                         .onAction(e -> trayToBackHelper(stage))
