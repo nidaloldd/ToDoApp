@@ -137,15 +137,15 @@ Az applikáció asztali alkalmazásként már teljesen használhatóvá vált. A
 ## Az applikáció végleges kinézete
 
 ### Az app main felülete, ahol megjelennek a taskok
-![ToDoMain](Tervek/current-design/ToDoMain.png.png)
+![ToDoMain](Tervek/current-design/ToDoMain.png)
 ### Ezt látjuk egy task lenyitásakor
-![ToDoExpand](Tervek/current-design/ToDoExpand.png.png)
+![ToDoExpand](Tervek/current-design/ToDoExpand.png)
 ### Itt adhatunk hozzá újabb cetliket
-![CetliMuhely](Tervek/current-design/CetliMuhely.png.png)
+![CetliMuhely](Tervek/current-design/CetliMuhely.png)
 ### Egy todo notification
-![ToDoNotification](Tervek/current-design/ToDoNotification.png.png)
+![ToDoNotification](Tervek/current-design/ToDoNotification.png)
 ### Az appunk így jelenik meg az asztalon widgetként
-![ToDoWidget](Tervek/current-design/ToDoWidget.png.png)
+![ToDoWidget](Tervek/current-design/ToDoWidget.png)
 
 
 ## Az applikáció végleges osztályai
@@ -153,25 +153,25 @@ Az applikáció asztali alkalmazásként már teljesen használhatóvá vált. A
 ### Segédosztály, ami segít elérni az applikáció widgetté alakítását
 ![ToDoWidget](Tervek/intellij-currentuml/ApplicationWidgetizer.png)
 ### A cetliket eltárolni segítő osztály
-![ToDoWidget](Tervek/intellij-currentuml/CetliContainer.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/CetliContainer.png)
 ### A Cetlivel végezhető műveletek
-![ToDoWidget](Tervek/intellij-currentuml/CetliMethods.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/CetliMethods.png)
 ### A Cetli osztály változói
-![ToDoWidget](Tervek/intellij-currentuml/CetliVariables.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/CetliVariables.png)
 ### A CetliMűhely osztály felületéért felelős osztály
-![ToDoWidget](Tervek/intellij-currentuml/CreateTaskController.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/CreateTaskController.png)
 ### Az applikációnk
-![ToDoWidget](Tervek/intellij-currentuml/HelloApplication.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/HelloApplication.png)
 ### Az elsődleges screen felületéért felelős osztály
-![ToDoWidget](Tervek/intellij-currentuml/MainController.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/MainController.png)
 ### Enum osztály, mely a prioritásokat tartalmazza
-![ToDoWidget](Tervek/intellij-currentuml/PriorityLevel.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/PriorityLevel.png)
 ### Segédosztály, amely az ablak újraméretezésében segít
-![ToDoWidget](Tervek/intellij-currentuml/ResizeHelper.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/ResizeHelper.png)
 ### Egy-egy ToDo Cetlivel elvégezhető műveletekért felelős osztály
-![ToDoWidget](Tervek/intellij-currentuml/TaskCardController.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/TaskCardController.png)
 ### Az alkalmazásban kialakított fás szerkezetének alapját adó osztály
-![ToDoWidget](Tervek/intellij-currentuml/Tree.png.png)
+![ToDoWidget](Tervek/intellij-currentuml/Tree.png)
 
 
 
